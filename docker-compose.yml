@@ -174,3 +174,10 @@ services:
         - "COURSE_GH_ORG_TOKEN=${GH_DOCKER_TOKEN}"
         - PATCH_SOURCE_REPO
         restart: always
+    assertiongeneration:
+        image: lucaszamprogno/assertion-server
+        expose:
+        - 8080
+        volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+        - /home/lucas/tmp:/var/opt/classy/assertiongeneration
