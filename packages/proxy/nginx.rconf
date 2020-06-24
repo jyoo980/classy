@@ -56,16 +56,20 @@ http {
             proxy_pass         http://labcyclewebservice:4321;
         }
 
-        location /assertiongeneration {
-            port_in_redirect   off;
-            rewrite            /assertiongeneration(/.+) $1 break;
-            proxy_read_timeout 240;
-            proxy_pass         http://assertiongeneration:8080;
-        }
+        # location /assertiongeneration {
+        #     port_in_redirect   off;
+        #     rewrite            /assertiongeneration(/.+) $1 break;
+        #     proxy_read_timeout 240;
+        #     proxy_pass         http://assertiongeneration:8080;
+        # }
 
         # pass requests to the portal service (which is automatically defined in the hosts file by docker)
+        # location / {
+        #     proxy_pass         "https://portal:<%= ENV["BACKEND_PORT"] %>/";
+        # }
+
         location / {
-            proxy_pass         "https://portal:<%= ENV["BACKEND_PORT"] %>/";
+            proxy_pass         http://assertiongeneration:8080;
         }
     }
 }
