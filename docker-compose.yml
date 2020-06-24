@@ -176,6 +176,7 @@ services:
         - PATCH_SOURCE_REPO
         restart: always
     assertiongeneration:
+        container_name: assertiongeneration
         image: lucaszamprogno/assertion-server
         expose:
         - 8080
